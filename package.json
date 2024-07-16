@@ -4,6 +4,7 @@
   "description": "The purpose of the project is to provide a framework to transfer data from one place to another",
   "main": "index.js",
   "scripts": {
+    "start": "ts-node index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
