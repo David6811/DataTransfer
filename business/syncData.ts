@@ -8,7 +8,7 @@ export function syncData() {
 
     fetchByPage(1, 10)
         .then(async (results: ParseNote[]) => {
-            // results.forEach(async parseNote => {
+            // results.forEach(async parseNote => { //forEach can not be sync
             for (const parseNote of results) {
                 const parseNotesData: Parse_Notes = {
                     content: parseNote.content,
