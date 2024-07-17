@@ -6,9 +6,10 @@ export function syncData() {
     // const totalRecords = await getTotalRecords();
     // console.log(totalRecords);
 
-    fetchByPage(1, 1)
-        .then((results: ParseNote[]) => {
-            results.forEach(parseNote => {
+    fetchByPage(1, 10)
+        .then(async (results: ParseNote[]) => {
+            // results.forEach(async parseNote => {
+            for (const parseNote of results) {
                 const parseNotesData: Parse_Notes = {
                     content: parseNote.content,
                     title: parseNote.title,
@@ -18,7 +19,8 @@ export function syncData() {
                     deviceId: parseNote.deviceId,
                     parentId: parseNote.parentId
                 };
-                insertData(parseNotesData);
-            });
+                console.log("insertData");
+                console.log(await insertData(parseNotesData));
+            };
         })
 }

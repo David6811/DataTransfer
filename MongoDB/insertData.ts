@@ -14,11 +14,9 @@ client.connect();
 
 
 export async function insertData(document:Parse_Notes) {
-    console.log("insertData");
     const database = client.db(db);
     const ParseNote = database.collection(collection);
     const result = await ParseNote.insertOne(document);
-    console.log(result);
     return result;
 }
 
