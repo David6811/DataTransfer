@@ -1,29 +1,24 @@
 const { MongoClient } = require("mongodb");
-import { FETCH_URI_MONGODB } from "../public/config"
+import { INSERT_URI_MONGODB } from "../public/config"
+import { Parse_Notes } from "../public/inf"
 
 
-const client = new MongoClient(FETCH_URI_MONGODB);
+const client = new MongoClient(INSERT_URI_MONGODB);
 const db = "db_anycopy_prod";
-const collection = "parse_notes";
+const collection = "parse-notes";
 
 
-export interface Parse_Notes {
-    content: string;   // 'text' type in your structure
-    title: string;     // 'text' type in your structure
-    noteId: number;    // 'number' type in your structure
-    type: number;      // 'number' type in your structure
-    status: number;    // 'number' type in your structure
-    deviceId: string;  // 'text' type in your structure
-    parentId: number;  // 'number' type in your structure
-  }
+
 
 client.connect();
 
 
-export async function insert(document:Parse_Notes) {
+export async function insertData(document:Parse_Notes) {
+    console.log("insertData");
     const database = client.db(db);
     const ParseNote = database.collection(collection);
     const result = await ParseNote.insertOne(document);
+    console.log(result);
     return result;
 }
 

@@ -17,3 +17,14 @@ export interface ParseNote {
     _updated_at: string; // Use Date type if you prefer working with Date objects
     _created_at: string; // Use Date type if you prefer working with Date objects
 }
+
+
+export interface Parse_Notes {
+    content: string;
+    title: string; 
+    noteId: number;
+    type: number; 
+    status: number;  
+    deviceId: string; 
+    parentId: number; 
+  }
