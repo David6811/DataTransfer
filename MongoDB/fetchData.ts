@@ -9,7 +9,6 @@ const collection = "ParseNote";
 client.connect();
 
 export async function getTotalRecords() {
-
     const database = client.db(db);
     const ParseNote = database.collection(collection);
     const totalRecords = await ParseNote.countDocuments();
@@ -17,12 +16,12 @@ export async function getTotalRecords() {
 }
 
 export async function fetchByPage(pageNumber = 1, pageSize = 10) {
-        const database = client.db(db);
-        const ParseNote = database.collection(collection);
-        const skip = (pageNumber - 1) * pageSize;
-        const cursor = await ParseNote.find().skip(skip).limit(pageSize);
-        const results = await cursor.toArray();
-        return results;
+    const database = client.db(db);
+    const ParseNote = database.collection(collection);
+    const skip = (pageNumber - 1) * pageSize;
+    const cursor = await ParseNote.find().skip(skip).limit(pageSize);
+    const results = await cursor.toArray();
+    return results;
 }
 
 
