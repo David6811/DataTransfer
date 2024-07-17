@@ -1,27 +1,28 @@
 const { MongoClient } = require("mongodb");
+import { FETCH_URI_MONGODB } from "../public/config"
 
-const uri = "mongodb://204.48.22.75:27017/";
 
-const client = new MongoClient(uri);
+const client = new MongoClient(FETCH_URI_MONGODB);
+const db = "db_anycopy_prod";
+const collection = "ParseNote";
+
+client.connect();
+
+export async function getTotalRecords() {
+    const database = client.db(db);
+    const ParseNote = database.collection(collection);
+    const totalRecords = await ParseNote.countDocuments();
+    return totalRecords;
+}
 
 export async function fetchByPage(pageNumber = 1, pageSize = 10) {
-  try {
-    await client.connect();
-
-    const database = client.db('db_anycopy_prod');
-    const ParseNote = database.collection('ParseNote');
-
-    //const query = { title: 'Back to the Future' };
-
+    const database = client.db(db);
+    const ParseNote = database.collection(collection);
     const skip = (pageNumber - 1) * pageSize;
-    const cursor = ParseNote.find().skip(skip).limit(pageSize);
-
+    const cursor = await ParseNote.find().skip(skip).limit(pageSize);
     const results = await cursor.toArray();
-
-    console.log(results);
-  } finally {
-    await client.close();
-  }
+    return results;
 }
+
 
 
